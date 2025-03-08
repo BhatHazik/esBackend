@@ -1,11 +1,14 @@
-// const express = require('express');
-// const { loginMOD } = require('../Controllers/mod.controller');
-// const { protect } = require('../Controllers/auth.controller');
-// const router = express.Router();
+const express = require('express');
+const { restrictTo, protect } = require('../Controllers/auth.controller');
+const { getAssignedMatches, acceptMatch } = require('../Controllers/mod.controller');
 
 
-// router.post('/modLogin', loginMOD);
+const router = express.Router();
 
+router.use(protect);
+router.use(restrictTo('moderator'));
 
+router.get('/getAssignedMatches', getAssignedMatches);
+router.post('/acceptMatch', acceptMatch);
 
-// module.exports = router;
+module.exports = router;

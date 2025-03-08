@@ -1,6 +1,4 @@
-const { DataTypes } = require('sequelize');
-const sequelize = require('./connection');
-
+module.exports = (sequelize, DataTypes) => {
 const User = sequelize.define('User', {
     id: {
         type: DataTypes.INTEGER,
@@ -9,41 +7,43 @@ const User = sequelize.define('User', {
     },
     name: {
         type: DataTypes.STRING,
-        allowNull: true
-    },
-    email: {
-        type: DataTypes.STRING,
-        allowNull: true,
-        unique: true,
-        validate: {
-            isEmail: true
-        }
+        allowNull: false
     },
     phone_number: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true
     },
     country_code: {
         type: DataTypes.STRING,
         allowNull: false
     },
-    verification_token: {
+    email: {
         type: DataTypes.STRING,
-        allowNull: true
+        allowNull: false,
+        validate: {
+            isEmail: true
+        }
     },
-    token_expires: {
-        type: DataTypes.DATE,
-        allowNull: true
+    game: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    type: {
+        type: DataTypes.TEXT,
+        defaultValue: 'user',
+        allowNull: false
+    },
+    team_id: {
+        type: DataTypes.INTEGER,
+        allowNull: true,
+    },
+    leadership: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
     },
     is_verified: {
         type: DataTypes.BOOLEAN,
         defaultValue: false
-    },
-    type: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        defaultValue: 'user'
     },
     created_at: {
         type: DataTypes.DATE,
@@ -58,5 +58,5 @@ const User = sequelize.define('User', {
     createdAt: 'created_at',
     updatedAt: 'updated_at'
 });
-
-module.exports = User;
+return User;
+};

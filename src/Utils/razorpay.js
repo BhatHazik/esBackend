@@ -1,6 +1,6 @@
 const Razorpay = require('razorpay');
-const { catchAsync } = require("./catchAsync");
-const AppError = require("./error");
+// const { catchAsync } = require("./catchAsync");
+// const AppError = require("./error");
 const crypto = require('crypto')
 
 const razorpay = new Razorpay({

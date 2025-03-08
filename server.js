@@ -1,10 +1,9 @@
 require('dotenv').config({path:'./config.env'});
-const sequelize = require('./src/models/connection');
+require('./src/models/index');
 const server = require('./app');
 
 const PORT = process.env.PORT || 3000;
 
-sequelize.sync().then(() => {
     server.listen(PORT, () => {
         console.log(`
             ──▄────▄▄▄▄▄▄▄────▄───  ☠️  DANGER! ☠️  
@@ -14,6 +13,3 @@ sequelize.sync().then(() => {
             ─▀█────██▀█▀██────█▀──  🔹 Have fun (but beware)! 🌟
             `);
     });
-}).catch(err => {
-    console.error('Unable to connect to the database:', err);
-});
